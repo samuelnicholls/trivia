@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Head from 'next/head';
 import Footer from './Footer';
 import Header from './Header';
@@ -11,7 +11,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <Head>
-        <title>Movie Listing</title>
+        <title>Trivia</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
