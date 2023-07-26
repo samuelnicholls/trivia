@@ -1,6 +1,9 @@
-export type DisplayViews = 'introduction' | 'quiz';
+export type DisplayViews = 'introduction' | 'quiz' | 'results';
 
 export type Question = {
-  id: number,
-  title: string
-}
+  question: {
+    text: string;
+  };
+  correctAnswer: string;
+  incorrectAnswers: string[];
+};

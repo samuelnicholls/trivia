@@ -8,7 +8,7 @@ import '../styles/globals.css';
 function App({ Component, pageProps }: AppProps) {
   return (
     <Layout>
-      <SWRConfig value={{ fetcher }}>
+      <SWRConfig value={{ revalidateOnFocus: false, fetcher }}>
         <Component {...pageProps} />
       </SWRConfig>
     </Layout>

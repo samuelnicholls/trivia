@@ -1,24 +1,26 @@
 import { FC } from 'react';
+import { Question } from '@/types';
 
-const Question: FC = () => {
+export type QuestionProps = {
+  currentQuestion: Question;
+  handleAnswerSelection: (answer: string) => void;
+  usersSelectedAnswer: string;
+};
+
+const Question: FC<QuestionProps> = ({ currentQuestion, handleAnswerSelection, usersSelectedAnswer }) => {
+  const answersList = [currentQuestion.correctAnswer, ...currentQuestion.incorrectAnswers].reverse();
+
   return (
     <div>
       <p className="mt-4 text-2xl tracking-tight text-gray-900 dark:text-white text-left">
-        Lorem ipsum dolor sit amet
+        {currentQuestion.question.text}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-        <div className="p-4 border border-white rounded-lg text-white">
-          Lorem ipsum dolor sit amet
-        </div>
-        <div className="p-4 border border-white rounded-lg text-white">
-          Lorem ipsum dolor sit amet
-        </div>
-        <div className="p-4 border border-white rounded-lg text-white">
-          Lorem ipsum dolor sit amet
-        </div>
-        <div className="p-4 border border-white rounded-lg text-white">
-          Lorem ipsum dolor sit amet
-        </div>
+        {answersList.map((answer: string, index: number) => (
+          <button key={index} className={`${usersSelectedAnswer === answer ? 'border-amber-300' : 'border-white'} p-4 border rounded-lg text-white`} onClick={() => handleAnswerSelection(answer)}>
+            {answer}
+          </button>
+        ))}
       </div>
     </div>
   );

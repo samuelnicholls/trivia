@@ -1,24 +1,28 @@
-import {create} from "zustand";
-import { Question } from "./types";
+import { create } from 'zustand';
+
+type QuestionStore = {
+  title: string;
+  answers: string[];
+  usersSelectedAnswer: string;
+};
 
 interface QuestionsState {
-  questions: Question[];
-  addQuestion: (question: Question) => void;
+  questions: QuestionStore[];
+  addQuestion: (question: QuestionStore) => void;
 }
 
-export const useQuestionsStore = create<QuestionsState>((set) => (
-  {
-    questions: [],
-    addQuestion: (question: Question) => {
-      set((state) => ({
-        questions: [
-          ...state.questions,
-          {
-            id: question.id,
-            title: question.title,
-          }
-        ],
-      }));
-    }
-  }
-))
+export const useQuestionsStore = create<QuestionsState>((set) => ({
+  questions: [],
+  addQuestion: (question: QuestionStore) => {
+    set((state) => ({
+      questions: [
+        ...state.questions,
+        {
+          title: question.title,
+          answers: question.answers,
+          usersSelectedAnswer: question.usersSelectedAnswer,
+        },
+      ],
+    }));
+  },
+}));

@@ -1,16 +1,11 @@
 import useSWR, { SWRResponse } from 'swr';
-
-type QuestionsDefinition = {
-  question: {
-    title: string;
-  };
-};
+import { Question } from '@/types';
 
 export const getQuestionsApiUrl =
   'https://the-trivia-api.com/v2/questions?limit=10';
 
-const useQuestions = (): SWRResponse<QuestionsDefinition[], unknown> => {
-  return useSWR<QuestionsDefinition[]>(getQuestionsApiUrl);
+const useQuestions = (): SWRResponse<Question[], unknown> => {
+  return useSWR<Question[]>(getQuestionsApiUrl);
 };
 
 export default useQuestions;

@@ -1,3 +1,4 @@
+import { useQuestionsStore } from '@/store';
 import { useState } from 'react';
 import { preload } from 'swr';
 import type { NextPage } from 'next';
@@ -6,15 +7,11 @@ import Title from '@/components/Title';
 import { getQuestionsApiUrl } from './api/useQuestions';
 import { DisplayViews } from '@/types';
 import { fetcher } from '@/utils';
-import { useQuestionsStore } from "@/store";
 
 const Home: NextPage = () => {
   const [displayView, setDisplayView] = useState<DisplayViews>('introduction');
+  const { questions } = useQuestionsStore();
   preload(getQuestionsApiUrl, fetcher);
-  const questions = useQuestionsStore(state => state.questions)
-
-  // eslint-disable-next-line no-console
-  console.log("questions", questions)
 
   return (
     <div className="container mx-auto max-w-4xl">
@@ -23,7 +20,16 @@ const Home: NextPage = () => {
         {displayView === 'introduction' && (
           <button onClick={() => setDisplayView('quiz')}>Start Quiz</button>
         )}
-        {displayView === 'quiz' && <Quiz />}
+        {displayView === 'quiz' && <Quiz setDisplayView={setDisplayView} />}
+        {displayView === 'results' && (
+          <div>
+            {questions.map((question, index: number) => (
+              <div key={index}>
+                <p>{question.title}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
