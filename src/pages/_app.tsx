@@ -1,14 +1,18 @@
 import React from 'react';
+import { SWRConfig } from 'swr';
 import type { AppProps } from 'next/app';
-import '../styles/globals.css';
 import Layout from '@/components/Layout';
+import { fetcher } from '@/utils';
+import '../styles/globals.css';
 
 function App({ Component, pageProps }: AppProps) {
   return (
     <Layout>
-      <Component {...pageProps} />
+      <SWRConfig value={{ fetcher }}>
+        <Component {...pageProps} />
+      </SWRConfig>
     </Layout>
-  )
+  );
 }
 
 export default App;
