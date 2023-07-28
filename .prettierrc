@@ -1,6 +1,6 @@
 {
   "trailingComma": "all",
   "singleQuote": true,
-  "importOrder": ["^(next/(.*)$)|^(next$)", "^@/components/(.*)$", "^./api[./]|^../api[./]", "^@/hooks/(.*)$", "^@/types(.*)$", "^@/utils(.*)$", "^[./]"],
+  "importOrder": ["^(next/(.*)$)|^(next$)", "^@/components/(.*)$", "^./api[./]|^../api[./]", "^@/hooks/(.*)$", "^@/store(.*)$", "^@/types(.*)$", "^@/utils(.*)$", "^[./]"],
   "importOrderSortSpecifiers": true
 }

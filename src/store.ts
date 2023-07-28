@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 
-type QuestionStore = {
+export type QuestionStore = {
   title: string;
   answers: string[];
   usersSelectedAnswer: string;
+  correctAnswer: string;
 };
 
 interface QuestionsState {
@@ -21,6 +22,7 @@ export const useQuestionsStore = create<QuestionsState>((set) => ({
           title: question.title,
           answers: question.answers,
           usersSelectedAnswer: question.usersSelectedAnswer,
+          correctAnswer: question.correctAnswer,
         },
       ],
     }));

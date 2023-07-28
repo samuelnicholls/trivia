@@ -1,7 +1,8 @@
 import useQuestions from '@/pages/api/useQuestions';
-import { useQuestionsStore } from '@/store';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { useQuestionsStore } from '@/store';
 import { DisplayViews } from '@/types';
+import Button from './Button';
 import ProgressBar from './ProgressBar';
 import Question from './Question';
 
@@ -16,7 +17,7 @@ const Quiz: FC<QuizProps> = ({ setDisplayView }) => {
   const { addQuestion } = useQuestionsStore();
   const { data: questions } = useQuestions();
   const currentQuestion = questions ? questions[currentQuestionIndex] : null;
-  const numberOfQuestions = 10;
+  const numberOfQuestions = 2;
 
   const handleAnswerSelection = (answer: string) => {
     if (!currentQuestion) return null;
@@ -32,6 +33,7 @@ const Quiz: FC<QuizProps> = ({ setDisplayView }) => {
         ...currentQuestion.incorrectAnswers,
       ].reverse(),
       usersSelectedAnswer: answer,
+      correctAnswer: currentQuestion.correctAnswer,
     });
   };
 
@@ -47,7 +49,9 @@ const Quiz: FC<QuizProps> = ({ setDisplayView }) => {
   return (
     <>
       <ProgressBar />
-      <p className="mt-4 text-xl font-bold text-white">0 out of 0</p>
+      <p className="mt-4 text-xl font-bold text-white">
+        {currentQuestionIndex + 1} out of {numberOfQuestions}
+      </p>
       {currentQuestion && (
         <>
           <Question
@@ -56,14 +60,11 @@ const Quiz: FC<QuizProps> = ({ setDisplayView }) => {
             usersSelectedAnswer={usersSelectedAnswer}
           />
           <div className="mt-8 text-right">
-            <button
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-              disabled={!usersSelectedAnswer}
+            <Button
+              text="Next"
               onClick={() => handleNextQuestion()}
-            >
-              Next
-            </button>
+              disabled={!usersSelectedAnswer}
+            />
           </div>
         </>
       )}
