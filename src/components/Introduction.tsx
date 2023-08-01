@@ -1,6 +1,7 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { DisplayViews } from '@/types';
 import Button from './Button';
+import Heading from './Heading';
 
 export type IntroductionProps = {
   setDisplayView: Dispatch<SetStateAction<DisplayViews>>;
@@ -9,9 +10,7 @@ export type IntroductionProps = {
 const Introduction: FC<IntroductionProps> = ({ setDisplayView }) => {
   return (
     <div>
-      <h2 className="text-4xl font-extrabold dark:text-white">
-        Welcome to Trivia
-      </h2>
+      <Heading text="Welcome to Trivia" />
       <p className="text-lg font-normal text-white my-8">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
