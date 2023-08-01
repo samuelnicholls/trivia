@@ -1,16 +1,5 @@
 import { create } from 'zustand';
-
-export type QuestionStore = {
-  title: string;
-  answers: string[];
-  usersSelectedAnswer: string;
-  correctAnswer: string;
-};
-
-interface QuestionsState {
-  questions: QuestionStore[];
-  addQuestion: (question: QuestionStore) => void;
-}
+import { QuestionStore, QuestionsState, ScoreStore } from './types';
 
 export const useQuestionsStore = create<QuestionsState>((set) => ({
   questions: [],
@@ -27,4 +16,9 @@ export const useQuestionsStore = create<QuestionsState>((set) => ({
       ],
     }));
   },
+}));
+
+export const useScoreStore = create<ScoreStore>((set) => ({
+  score: 0,
+  increaseScore: () => set((state) => ({ score: state.score + 1 })),
 }));

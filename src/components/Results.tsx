@@ -1,40 +1,23 @@
 import { FC } from 'react';
-import { QuestionStore } from '@/store';
+import { useQuestionsStore, useScoreStore } from '@/store';
+import { QuestionStore } from '@/types';
+import Heading from './Heading';
 
 const Results: FC = () => {
-  const questions = [
-    {
-      title: 'Test Title One - Correct Answer',
-      answers: ['One', 'Two', 'Three', 'Four'],
-      usersSelectedAnswer: 'Two',
-      correctAnswer: 'Two',
-    },
-    {
-      title: 'Test Title Two - Incorrect Answer',
-      answers: ['One', 'Two', 'Three', 'Four'],
-      usersSelectedAnswer: 'One',
-      correctAnswer: 'Three',
-    },
-  ];
+  const { questions } = useQuestionsStore();
+  const { score } = useScoreStore();
 
   const determineAnswerClassName = (
     question: QuestionStore,
     answer: string,
   ) => {
-    // eslint-disable-next-line no-console
-    console.log('question', question);
-    // eslint-disable-next-line no-console
-    console.log('answer', answer);
-    if (
-      question.usersSelectedAnswer === question.correctAnswer &&
-      answer === question.correctAnswer
-    ) {
+    if (answer === question.correctAnswer) {
       return 'border-green-700';
     } else if (
       question.usersSelectedAnswer !== question.correctAnswer &&
-      answer === question.correctAnswer
+      answer === question.usersSelectedAnswer
     ) {
-      return 'border-red';
+      return 'border-red-500';
     } else {
       return 'border-white';
     }
@@ -42,12 +25,10 @@ const Results: FC = () => {
 
   return (
     <div>
-      <h2 className="text-4xl font-extrabold dark:text-white mb-8">
-        You scored 5 out of 10!
-      </h2>
+      <Heading text={`You scored ${score} out of 10!`} />
       {questions.map((question, index: number) => (
-        <div key={index} className="mb-8">
-          <p className="mt-4 text-2xl tracking-tight text-gray-900 dark:text-white text-left">
+        <div key={index} className="mt-8 mb-8">
+          <p className="mt-4 text-2xl tracking-tight text-gray-900 text-white text-left">
             {question.title}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">

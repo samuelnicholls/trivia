@@ -1,6 +1,6 @@
 import useQuestions from '@/pages/api/useQuestions';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
-import { useQuestionsStore } from '@/store';
+import { useQuestionsStore, useScoreStore } from '@/store';
 import { DisplayViews } from '@/types';
 import Button from './Button';
 import ProgressBar from './ProgressBar';
@@ -12,32 +12,33 @@ export type QuizProps = {
 
 const Quiz: FC<QuizProps> = ({ setDisplayView }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [usersScore, setUsersScore] = useState<number>(0);
   const [usersSelectedAnswer, setUsersSelectedAnswer] = useState<string>('');
   const { addQuestion } = useQuestionsStore();
+  const { increaseScore } = useScoreStore();
   const { data: questions } = useQuestions();
   const currentQuestion = questions ? questions[currentQuestionIndex] : null;
-  const numberOfQuestions = 2;
+  const numberOfQuestions = 10;
 
   const handleAnswerSelection = (answer: string) => {
+    setUsersSelectedAnswer(answer);
+  };
+
+  const handleNextQuestion = () => {
     if (!currentQuestion) return null;
-    if (answer === currentQuestion.correctAnswer) {
-      setUsersScore(usersScore + 1);
+    if (usersSelectedAnswer === currentQuestion.correctAnswer) {
+      increaseScore();
     }
 
-    setUsersSelectedAnswer(answer);
     addQuestion({
       title: currentQuestion.question.text,
       answers: [
         currentQuestion.correctAnswer,
         ...currentQuestion.incorrectAnswers,
       ].reverse(),
-      usersSelectedAnswer: answer,
+      usersSelectedAnswer: usersSelectedAnswer,
       correctAnswer: currentQuestion.correctAnswer,
     });
-  };
 
-  const handleNextQuestion = () => {
     if (numberOfQuestions - 1 === currentQuestionIndex) {
       setDisplayView('results');
     } else {
@@ -48,7 +49,9 @@ const Quiz: FC<QuizProps> = ({ setDisplayView }) => {
 
   return (
     <>
-      <ProgressBar />
+      <ProgressBar
+        width={((currentQuestionIndex + 1) / numberOfQuestions) * 100}
+      />
       <p className="mt-4 text-xl font-bold text-white">
         {currentQuestionIndex + 1} out of {numberOfQuestions}
       </p>

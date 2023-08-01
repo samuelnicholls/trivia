@@ -10,7 +10,7 @@ import { DisplayViews } from '@/types';
 import { fetcher } from '@/utils';
 
 const Home: NextPage = () => {
-  const [displayView, setDisplayView] = useState<DisplayViews>('results');
+  const [displayView, setDisplayView] = useState<DisplayViews>('introduction');
   preload(getQuestionsApiUrl, fetcher);
 
   return (
