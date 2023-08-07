@@ -18,9 +18,11 @@ export type QuestionStore = {
 export interface QuestionsState {
   questions: QuestionStore[];
   addQuestion: (question: QuestionStore) => void;
+  resetQuestions: () => void;
 }
 
 export type ScoreStore = {
   score: number;
   increaseScore: () => void;
+  resetScore: () => void;
 };

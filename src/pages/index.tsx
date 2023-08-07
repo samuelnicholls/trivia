@@ -17,11 +17,9 @@ const Home: NextPage = () => {
     <div className="container mx-auto max-w-4xl">
       <Title text="Trivia" />
       <div className="block p-8 border rounded-lg shadow bg-gray-800 border-gray-700">
-        {displayView === 'introduction' && (
-          <Introduction setDisplayView={setDisplayView} />
-        )}
+        {displayView === 'introduction' && <Introduction setDisplayView={setDisplayView} />}
         {displayView === 'quiz' && <Quiz setDisplayView={setDisplayView} />}
-        {displayView === 'results' && <Results />}
+        {displayView === 'results' && <Results setDisplayView={setDisplayView} />}
       </div>
     </div>
   );

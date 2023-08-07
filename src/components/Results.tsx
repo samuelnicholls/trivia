@@ -1,11 +1,16 @@
-import { FC } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { useQuestionsStore, useScoreStore } from '@/store';
-import { QuestionStore } from '@/types';
+import { DisplayViews, QuestionStore } from '@/types';
 import Heading from './Heading';
+import Button from './Button';
 
-const Results: FC = () => {
-  const { questions } = useQuestionsStore();
-  const { score } = useScoreStore();
+export type ResultsProps = {
+  setDisplayView: Dispatch<SetStateAction<DisplayViews>>;
+};
+
+const Results: FC<ResultsProps> = ({ setDisplayView }) => {
+  const { questions, resetQuestions } = useQuestionsStore();
+  const { score, resetScore } = useScoreStore();
 
   const determineAnswerClassName = (
     question: QuestionStore,
@@ -23,6 +28,12 @@ const Results: FC = () => {
     }
   };
 
+  const handlePlayAgain = () => {
+    setDisplayView("quiz");
+    resetQuestions();
+    resetScore();
+  }
+
   return (
     <div>
       <Heading text={`You scored ${score} out of 10!`} />
@@ -38,7 +49,7 @@ const Results: FC = () => {
                   className={`${determineAnswerClassName(
                     question,
                     answer,
-                  )} p-4 border rounded-lg text-white`}
+                  )} p-4 border rounded-lg text-white h-full flex justify-center items-center`}
                 >
                   {answer}
                 </div>
@@ -47,6 +58,9 @@ const Results: FC = () => {
           </div>
         </div>
       ))}
+      <div>
+        <Button text="Play Again" onClick={() => handlePlayAgain()} />
+      </div>
     </div>
   );
 };
