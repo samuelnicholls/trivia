@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   preload(getQuestionsApiUrl, fetcher);
 
   return (
-    <div className="container mx-auto max-w-4xl">
+    <div className="container mx-auto max-w-4xl px-8">
       <Title text="Trivia" />
       <div className="block p-8 border rounded-lg shadow bg-gray-800 border-gray-700">
         {displayView === 'introduction' && (

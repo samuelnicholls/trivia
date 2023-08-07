@@ -19,7 +19,7 @@ const Question: FC<QuestionProps> = ({
 
   return (
     <div>
-      <p className="mt-4 text-2xl tracking-tight text-gray-900 dark:text-white text-left">
+      <p className="mt-4 text-2xl tracking-tight text-white text-left">
         {currentQuestion.question.text}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
