@@ -3,6 +3,7 @@ import { useQuestionsStore, useScoreStore } from '@/store';
 import { DisplayViews, QuestionStore } from '@/types';
 import Heading from './Heading';
 import Button from './Button';
+import { NUMBER_OF_QUESTIONS } from '@/consts';
 
 export type ResultsProps = {
   setDisplayView: Dispatch<SetStateAction<DisplayViews>>;
@@ -36,7 +37,7 @@ const Results: FC<ResultsProps> = ({ setDisplayView }) => {
 
   return (
     <div>
-      <Heading text={`You scored ${score} out of 10!`} />
+      <Heading text={`You scored ${score} out of ${NUMBER_OF_QUESTIONS}!`} />
       {questions.map((question, index: number) => (
         <div key={index} className="mt-8 mb-8">
           <p className="mt-4 text-2xl tracking-tight text-gray-900 text-white text-left">
