@@ -2,12 +2,12 @@ import { create } from 'zustand';
 import { QuestionStore, QuestionsState, ScoreStore } from './types';
 
 const questionsStoreInitialState = {
-  questions: []
-}
+  questions: [],
+};
 
 const scoreStoreInitialState = {
-  score: 0
-}
+  score: 0,
+};
 
 export const useQuestionsStore = create<QuestionsState>((set) => ({
   ...questionsStoreInitialState,
@@ -25,7 +25,7 @@ export const useQuestionsStore = create<QuestionsState>((set) => ({
     }));
   },
   resetQuestions: () => {
-    set(questionsStoreInitialState)
+    set(questionsStoreInitialState);
   },
 }));
 
@@ -33,6 +33,6 @@ export const useScoreStore = create<ScoreStore>((set) => ({
   ...scoreStoreInitialState,
   increaseScore: () => set((state) => ({ score: state.score + 1 })),
   resetScore: () => {
-    set(scoreStoreInitialState)
+    set(scoreStoreInitialState);
   },
 }));

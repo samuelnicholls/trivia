@@ -1,9 +1,9 @@
+import { NUMBER_OF_QUESTIONS } from '@/consts';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { useQuestionsStore, useScoreStore } from '@/store';
 import { DisplayViews, QuestionStore } from '@/types';
-import Heading from './Heading';
 import Button from './Button';
-import { NUMBER_OF_QUESTIONS } from '@/consts';
+import Heading from './Heading';
 
 export type ResultsProps = {
   setDisplayView: Dispatch<SetStateAction<DisplayViews>>;
@@ -30,10 +30,10 @@ const Results: FC<ResultsProps> = ({ setDisplayView }) => {
   };
 
   const handlePlayAgain = () => {
-    setDisplayView("quiz");
+    setDisplayView('quiz');
     resetQuestions();
     resetScore();
-  }
+  };
 
   return (
     <div>

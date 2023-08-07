@@ -1,3 +1,4 @@
+import { NUMBER_OF_QUESTIONS } from '@/consts';
 import useQuestions from '@/pages/api/useQuestions';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { useQuestionsStore, useScoreStore } from '@/store';
@@ -5,7 +6,6 @@ import { DisplayViews } from '@/types';
 import Button from './Button';
 import ProgressBar from './ProgressBar';
 import Question from './Question';
-import { NUMBER_OF_QUESTIONS } from '@/consts';
 
 export type QuizProps = {
   setDisplayView: Dispatch<SetStateAction<DisplayViews>>;
