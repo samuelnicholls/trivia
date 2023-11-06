@@ -1,25 +1,38 @@
 # Trivia
 
-## General info
+View Demo: https://trivia-samuelnicholls.vercel.app
+
+## About The Project
+
 This is a NextJS web application that retrives a list of quiz questions for the user to answer. This application uses NextJS for the framework, Tailwind CSS for styling, SWR for api requests and cache management and Zustand for state management.
 
-Live URL: https://trivia-samuelnicholls.vercel.app
-## Technologies
+## Built With
 * React
 * TypeScript
 * NextJS
 * SWR
 * Zustand
+* Tailwind CSS
 * Eslint
 * Prettier
-	
-## Setup
-To run this project, install it locally using npm:
 
+## Getting Started
+
+### Installation
+
+1. Clone the repository  
 ```
-$ git clone
-$ npm install
-$ npm build
-$ npm run dev
-$ Navigate to http://localhost:3000
+git clone https://github.com/samuelnicholls/trivia.git
+```
+2. Install all packages
+```
+npm install
+```
+3. Run a build for the first run of the project
+```
+npm run build
+```
+4. Start the local server, this will load the project at http://localhost:3000/
+```
+npm run dev
 ```
